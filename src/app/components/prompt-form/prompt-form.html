@@ -1,0 +1,54 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submitForm()"
+  class="space-y-6 max-w-md mx-auto p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow transition-colors duration-300"
+>
+  <!-- Prompt input -->
+  <input
+    formControlName="prompt"
+    type="text"
+    placeholder="Enter your story prompt"
+    class="w-full p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300"
+  />
+
+  <!-- Art style select -->
+  <select
+    formControlName="artStyle"
+    class="w-full p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300"
+  >
+    <option value="" disabled selected hidden>Select an art style</option>
+    <option *ngFor="let style of artStyles" [value]="style">{{ style }}</option>
+  </select>
+
+  <!-- Page count select -->
+  <select
+    formControlName="pageCount"
+    class="w-full p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300"
+  >
+    <option value="" disabled selected hidden>Select page count</option>
+    <option *ngFor="let count of pageCounts" [ngValue]="count">
+      {{ count }} page{{ count > 1 ? "s" : "" }}
+    </option>
+  </select>
+
+  <!-- Submit button: disabled while loading -->
+  <button
+    type="submit"
+    [disabled]="form.invalid || loading"
+    class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
+  >
+    <span *ngIf="!loading">Generate Story</span>
+    <span *ngIf="loading" class="flex items-center gap-2">
+      <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+      </svg>
+      Generating...
+    </span>
+  </button>
+</form>
+
+<app-story-viewer
+  *ngIf="storyPages.length"
+  [pages]="storyPages"
+></app-story-viewer>

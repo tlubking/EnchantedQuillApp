@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+html,
+body {
+  height: 100%;
+}
+html, body {
+  background-color: inherit;
+  color: inherit;
+}
+@layer base {
+  html {
+    background-color: #ffffff;
+    color: #111827; /* gray-900 */
+  }
+  html.dark {
+    background-color: #111827; /* gray-900 */
+    color: #f3f4f6; /* gray-100 */
+  }
+  /* Base colors (no @apply needed) */
+  html {
+    background-color: #ffffff;
+    color: #111827;
+  } /* white, gray-900 */
+  html.dark {
+    background-color: #111827;
+    color: #f3f4f6;
+  } /* gray-900, gray-100 */
+  body {
+    background-color: inherit;
+    color: inherit;
+  }
+
+  /* Smooth color transitions on major surfaces */
+  html,
+  body,
+  main,
+  .mat-toolbar,
+  .mat-mdc-card,
+  .cdk-overlay-container,
+  .mdc-dialog__surface {
+    transition: background-color 0.3s ease, color 0.3s ease,
+      border-color 0.3s ease, fill 0.3s ease;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    body,
+    main,
+    .mat-toolbar,
+    .mat-mdc-card,
+    .cdk-overlay-container,
+    .mdc-dialog__surface {
+      transition: none !important;
+    }
+  }
+
+  /* Your existing Material dark overrides (keep these) */
+  html.dark .mat-toolbar {
+    background-color: #1f2937 !important; /* gray-800 */
+    color: #f9fafb !important; /* gray-50/100 */
+  }
+  html.dark .mat-icon {
+    color: #f9fafb !important;
+  }
+
+  /* Overlays (menus/dialogs/selects) so popups match dark theme */
+  html.dark .cdk-overlay-container {
+    color: #e5e7eb;
+  } /* gray-200 text for overlays */
+  html.dark .mat-mdc-menu-panel,
+  html.dark .mat-mdc-select-panel,
+  html.dark .mat-mdc-autocomplete-panel {
+    background-color: #1f2937; /* gray-800 */
+    color: #e5e7eb; /* gray-200 */
+  }
+  html.dark .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: #111827; /* gray-900 */
+    color: #e5e7eb; /* gray-200 */
+  }
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
