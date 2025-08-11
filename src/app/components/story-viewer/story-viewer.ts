@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,9 +7,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './story-viewer.html',
   styleUrl: './story-viewer.css',
 })
-export class StoryViewer {
+export class StoryViewer implements OnChanges {
   @Input() pages: { text: string; imageUrl: string }[] = [];
   currentPage = 0;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['pages']) {
+      this.currentPage = 0; // Reset to first page when pages change
+    }
+  }
 
   nextPage() {
     if (this.currentPage < this.pages.length - 1) this.currentPage++;

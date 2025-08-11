@@ -40,6 +40,7 @@ export class Promptform {
   submitForm() {
     if (this.form.valid) {
       this.loading = true;
+      this.storyPages = []; // Resets pages if the user generates a new story
       const payload = {
         prompt: this.form.value.prompt,
         artStyle: this.form.value.artStyle,
