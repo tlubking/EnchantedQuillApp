@@ -48,7 +48,7 @@ export class Promptform {
 
       this.http
         .post<{ pages: { text: string; imageUrl: string }[] }>(
-          'https://localhost:7021/api/generate',
+          'https://enchantedquillapi-production.up.railway.app/api/generate',
           payload
         )
         .subscribe({
